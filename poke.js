@@ -1,3 +1,5 @@
+var pokemonNumbersToConsiderInRandomizer = [2, 5, 8, 11]
+
 var result1 = new Array();
 var result2 = new Array();
 var typeComp = 0;
@@ -113,8 +115,10 @@ function resetPoke() {
 
 
 function getRandomPokeID(){
-    maxPoke = 420
-    return Math.floor(Math.random() * Math.floor(maxPoke));
+    maxPoke = pokemonNumbersToConsiderInRandomizer.length;
+    var index = Math.floor(Math.random() * Math.floor(maxPoke));
+    console.log(index, pokemonNumbersToConsiderInRandomizer[index])
+    return pokemonNumbersToConsiderInRandomizer[index]
 }
 
 
