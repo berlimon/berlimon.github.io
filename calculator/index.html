@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Fusion Calculator</title>
+    <link rel="stylesheet" href="poke.css">
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Infinite Fusion Calculator</h1>
+    <div id="text">
+        <h4>
+            <br>
+            Only works with <a href="https://infinitefusion.fandom.com/wiki/Pokédex">natives mons available</a> in
+            Pokémon Infinite Fusion v5 !<br>
+            This project was created by <a href="https://twitter.com/SDM_0_">SDM0</a>,
+            then maintained by <a href="https://github.com/Aegide">Aegide</a>.<br>
+            The data used is from the game, but is mostly based on generation 7.
+            <br><br>
+            <i>
+                <span class="green-text">Custom sprites</span> in <span class="green-text">green</span> are made by artists,<br>
+                from the <a href="https://discord.com/invite/2yynWRvBrB">Infinite Fusion Discord</a>
+                and <a href="https://www.reddit.com/r/PokemonInfiniteFusion/">Reddit</a>.
+            </i>
+            <br><br>
+            <i>
+                <span class="red-text">Generated sprites</span> in <span class="red-text">red</span> are from 
+                <a href="https://japeal.com/pkm/">Japeal</a>.<br>
+                They were extracted and <a href="https://github.com/Aegide/autogen-fusion-sprites/commits/master/Battlers">fixed</a>
+                by <a href="https://github.com/Aegide">Aegide</a>.
+            </i>
+        </h4>
+        <br>
+		<div class="calculator">
+			<div id="t1" class="inputs">
+				<label for="fname1">First Pokémon:</label>
+				<input list="dlPkmn" type="text" id="fname1" name="fname1" value="" autocomplete="off">
+				<input id="random1" type="button" class="button" value="R1" onclick="randomFirstPoke()">
+			</div>
+			<div id="t2" class="inputs">
+				<label for="fname2">Second Pokémon:</label>
+				<input list="dlPkmn" type="text" id="fname2" name="fname2" value="" autocomplete="off">
+				<input id="random2" type="button" class="button" value="R2" onclick="randomSecondPoke()">
+			</div>
+		
+			<div class="buttons">
+				<input id="random" type="button" class="button" value="Random" onclick="randomBothPoke()">
+				<input id="reset" type="button" class="button" value="Reset" onclick="resetPoke()">
+				<input id="button" type="button" class="button" value="Fuse" onclick="fusePoke()">
+			</div>
+		</div>
+	</div>
+	<br />
+    <sector id="stats" class="stats">
+        <div id="L2">
+            <div>
+                <span id="dexnumber1">&nbsp;</span><span id="fusionid1">&nbsp;</span>
+            </div>
+            <img class="picpok" id="pic1" alt="" src="question.png">
+            <div id="FP1">mon1/mon2</div>
+            <div id="typecont">
+                <img class="pictype" id="p1" src="types/unknown.png">
+                <img class="pictype" id="p2" style="display:none">
+            </div>
+            <div class="monstats" id="hp1">HP: </div>
+            <div class="monstats" id="atk1">ATK: </div>
+            <div class="monstats" id="def1">DEF: </div>
+            <div class="monstats" id="spatk1">SPE.ATK: </div>
+            <div class="monstats" id="spdef1">SPE.DEF: </div>
+            <div class="monstats" id="spe1">SPEED: </div>
+            <div class="montotal" id="bs1">TOTAL: </div>
+            <div class="monab" id="ab1">ABILITY:</div>
+            <div class="monhab" id="hab1"></div>
+            <br>
+            <div class="monweak" data-default="x4: " id="weak14">x4: </div>
+            <div class="monweak" data-default="x2: " id="weak12">x2: </div>
+            <div class="monweak" data-default="x1: " id="weak11">x1: </div>
+            <div class="monweak" data-default="x0.5: " id="weak105">x0.5: </div>
+            <div class="monweak" data-default="x0.25: " id="weak1025">x0.25: </div>
+            <div class="monweak" data-default="x0: " id="weak100">x0: </div>
+        </div>
+        <div id="R2">
+            <div>
+                <span id="dexnumber2">&nbsp;</span><span id="fusionid2">&nbsp;</span>
+            </div>
+            <img class="picpok" id="pic2" alt="" src="question.png">
+            <div id="FP2">mon2/mon1</div>
+            <div id="typecont">
+                <img class="pictype" id="p3" src="types/unknown.png">
+                <img class="pictype" id="p4" style="display:none">
+            </div>
+            <div class="monstats" id="hp2">HP: </div>
+            <div class="monstats" id="atk2">ATK: </div>
+            <div class="monstats" id="def2">DEF: </div>
+            <div class="monstats" id="spatk2">SPE.ATK: </div>
+            <div class="monstats" id="spdef2">SPE.DEF: </div>
+            <div class="monstats" id="spe2">SPEED: </div>
+            <div class="montotal" id="bs2">TOTAL: </div>
+            <div class="monab" id="ab2">ABILITY:</div>
+            <div class="monhab" id="hab2"></div>
+            <br>
+            <div class="monweak" data-default="x4: " id="weak24">x4: </div>
+            <div class="monweak" data-default="x2: " id="weak22">x2: </div>
+            <div class="monweak" data-default="x1: " id="weak21">x1: </div>
+            <div class="monweak" data-default="x0.5: " id="weak205">x0.5: </div>
+            <div class="monweak" data-default="x0.25: " id="weak2025">x0.25: </div>
+            <div class="monweak" data-default="x0: " id="weak200">x0: </div>
+        </div>
+    </sector>
+    <!--<p id="bottom">All rights reserved to Pokémon</p>-->
+</body>
+<script src="infiniteFusionData.js"></script>
+<script src="poke.js"></script>
+</html>
